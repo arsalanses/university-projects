@@ -19,7 +19,7 @@ class DNA:
 
     def __init__(self, num, maxNum):
         self.num = num
-        self.maxNum = maxNum
+        self.maxNum = maxNum if maxNum >= num else num
         
         self.genes = random.sample(list(range(self.maxNum)), self.num)
 
@@ -83,6 +83,8 @@ def draw():
         child = crossover(partnerA, partnerB)
         child = mutate(child)
         population[i] = child
+
+print(target)
 
 setup()
 
