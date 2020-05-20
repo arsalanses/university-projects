@@ -86,14 +86,15 @@ setup()
 
 counter = 1
 while(not isFinished):
+    print(counter, end=". ")
+    draw()
+
     for i in population:
         if i.genes == target:
-            print(i.genes)
             isFinished = True
+            print("Best phrase: {}".format(i.genes))
             break
     else:
-        print(counter, end=". ")
-        draw()
         counter += 1
         totalGeneration += 1
 
