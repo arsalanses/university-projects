@@ -100,3 +100,5 @@ while(not isFinished):
     counter += 1
 
 print("Total generation: {}".format(totalGeneration))
+print("Total population: {}".format(totalPopulation))
+print("Mutation rate: {}%".format(int(mutationRate * 100)))
