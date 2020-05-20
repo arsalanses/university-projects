@@ -46,9 +46,9 @@ def crossover(partnerA, partnerB):
 
     for i in range(len(partnerA.genes)):
         if i > midpoint:
-            child.genes[i] = partnerA.genes[i]
-        else:
             child.genes[i] = partnerB.genes[i]
+        else:
+            child.genes[i] = partnerA.genes[i]
     
     return child
 
