@@ -95,7 +95,8 @@ while(not isFinished):
             print("Best phrase: {}".format(i.genes))
             break
     else:
-        counter += 1
         totalGeneration += 1
+    
+    counter += 1
 
 print("Total generation: {}".format(totalGeneration))
