@@ -30,6 +30,10 @@ class DNA:
         for i in range(len(self.genes)):
             if self.genes[i] == target[i]:
                 score += 1
+                continue
+            for j in range(i):
+                if self.genes[i] > self.genes[j]:
+                    score += 0.01
         
         self.fitness = score / len(target)
 
