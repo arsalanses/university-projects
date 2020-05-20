@@ -64,10 +64,10 @@ def mutate(child):
 
 def draw():
     # calcFitness
-    averageFitness = list()
+    averageFitness = 0
     for i in range(len(population)):
-        averageFitness.append(population[i].calcFitness(target))
-    averageFitness = round(sum(averageFitness) / len(averageFitness), 2)
+        averageFitness += population[i].calcFitness(target)
+    averageFitness = round(averageFitness / len(population), 2)
     print("Average fitness: {}".format(averageFitness))
 
     # matingPool
