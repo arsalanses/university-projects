@@ -68,7 +68,7 @@ def draw():
         averageFitness.append(population[i].calcFitness(target))
         averageFitness = round(sum(averageFitness) / len(averageFitness), 2)
 
-    print(averageFitness)
+    print("Average fitness: {}".format(averageFitness))
 
     # matingPool
     matingPool = list()
@@ -90,4 +90,4 @@ while(not isFinished):
     draw()
     totalGeneration += 1
 
-print("total generation: {}".format(totalGeneration))
+print("Total generation: {}".format(totalGeneration))
