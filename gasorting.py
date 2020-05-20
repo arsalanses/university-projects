@@ -1,7 +1,8 @@
 import random
 import math
 
-user_list = random.sample(list(range(100)), 50)
+# user_list = random.sample(list(range(100)), 50)
+user_list = range(10)
 
 target = sorted(user_list)
 
@@ -58,16 +59,11 @@ def mutate(child):
     return child
 
 def draw():
-    for i in population:
-        if i.genes == target:
-            isFinished = True
-
     # calcFitness
+    averageFitness = list()
     for i in range(len(population)):
-        averageFitness = list()
         averageFitness.append(population[i].calcFitness(target))
-        averageFitness = round(sum(averageFitness) / len(averageFitness), 2)
-
+    averageFitness = round(sum(averageFitness) / len(averageFitness), 2)
     print("Average fitness: {}".format(averageFitness))
 
     # matingPool
@@ -84,12 +80,21 @@ def draw():
         child = mutate(child)
         population[i] = child
 
-print(target)
+print("Target: {}".format(target))
 
 setup()
 
+counter = 1
 while(not isFinished):
-    draw()
-    totalGeneration += 1
+    for i in population:
+        if i.genes == target:
+            print(i.genes)
+            isFinished = True
+            break
+    else:
+        print(counter, end=". ")
+        draw()
+        counter += 1
+        totalGeneration += 1
 
 print("Total generation: {}".format(totalGeneration))
