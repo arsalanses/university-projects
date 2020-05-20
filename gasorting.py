@@ -6,6 +6,12 @@ user_list = random.sample(list(range(100)), 50)
 target = sorted(user_list)
 
 totalPopulation = 150
+mutationRate = 0.01
+
+population = list()
+
+isFinished = False
+totalGeneration = 1
 
 class DNA:
     genes = list()
@@ -26,19 +32,62 @@ class DNA:
         
         self.fitness = score / len(target)
 
-        # return self.fitness
+        return self.fitness
 
-population = list()
+def setup():
+    for i in range(totalPopulation):
+        population.append(DNA(len(target), max(target)))
 
-for i in range(totalPopulation):
-    population.append(DNA(len(target), max(target)))
+def crossover(partnerA, partnerB):
+    child = DNA(len(target), max(target))
 
-for i in range(len(population)):
-    population[i].calcFitness(target)
+    midpoint = random.randint(0, len(partnerA.genes))
 
-matingPool = list()
+    for i in range(len(partnerA.genes)):
+        if i > midpoint:
+            child.genes[i] = partnerA.genes[i]
+        else:
+            child.genes[i] = partnerB.genes[i]
+    
+    return child
 
-for i in range(len(population)):
-    n = math.floor(population[i].fitness * 100)
-    for j in range(n):
-        matingPool.append(population[i])
+def mutate(child):
+    for i in range(len(child.genes)):
+        if random.random() < mutationRate:
+            child.genes[i] = random.choice(target)
+    return child
+
+def draw():
+    for i in population:
+        if i.genes == target:
+            isFinished = True
+
+    # calcFitness
+    for i in range(len(population)):
+        averageFitness = list()
+        averageFitness.append(population[i].calcFitness(target))
+        averageFitness = round(sum(averageFitness) / len(averageFitness), 2)
+
+    print(averageFitness)
+
+    # matingPool
+    matingPool = list()
+    for i in range(len(population)):
+        n = math.floor(population[i].fitness * 100)
+        for j in range(n):
+            matingPool.append(population[i])
+
+    for i in range(len(population)):
+        partnerA = random.choice(matingPool)
+        partnerB = random.choice(matingPool)
+        child = crossover(partnerA, partnerB)
+        child = mutate(child)
+        population[i] = child
+
+setup()
+
+while(not isFinished):
+    draw()
+    totalGeneration += 1
+
+print("total generation: {}".format(totalGeneration))
