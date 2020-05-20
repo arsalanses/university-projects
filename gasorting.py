@@ -1,4 +1,5 @@
 import random
+import math
 
 user_list = random.sample(list(range(100)), 50)
 
@@ -25,7 +26,7 @@ class DNA:
         
         self.fitness = score / len(target)
 
-        return self.fitness
+        # return self.fitness
 
 population = list()
 
@@ -35,5 +36,9 @@ for i in range(totalPopulation):
 for i in range(len(population)):
     population[i].calcFitness(target)
 
-for i in population:
-    print(i.fitness)
+matingPool = list()
+
+for i in range(len(population)):
+    n = math.floor(population[i].fitness * 100)
+    for j in range(n):
+        matingPool.append(population[i])
