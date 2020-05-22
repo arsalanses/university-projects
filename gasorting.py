@@ -22,7 +22,7 @@ class DNA:
         self.num = num
         self.maxNum = maxNum if maxNum >= num else num
         
-        self.genes = random.sample(target, self.num) # list(range(self.maxNum))
+        self.genes = sorted(random.sample(list(range(100)), self.num)) # list(range(self.maxNum))
 
     def calcFitness(self, target):
         score = 0
