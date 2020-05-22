@@ -22,7 +22,7 @@ class DNA:
         self.num = num
         self.maxNum = maxNum if maxNum >= num else num
         
-        self.genes = random.sample(list(range(self.maxNum)), self.num)
+        self.genes = random.sample(target, self.num) # list(range(self.maxNum))
 
     def calcFitness(self, target):
         score = 0
@@ -32,8 +32,10 @@ class DNA:
                 score += 1
                 continue
             for j in range(i):
-                if self.genes[i] > self.genes[j]:
-                    score += 0.01
+                if self.genes[i] < self.genes[j]:
+                    break
+            else:
+                score += 0.01
         
         self.fitness = score / len(target)
 
@@ -63,12 +65,21 @@ def mutate(child):
     return child
 
 def draw():
+    global isFinished
     # calcFitness
     averageFitness = 0
+    bestGenes = population[1]
     for i in range(len(population)):
-        averageFitness += population[i].calcFitness(target)
+        fitness = population[i].calcFitness(target)
+        averageFitness += fitness
+        if bestGenes.fitness < population[i].fitness:
+            bestGenes = population[i]
     averageFitness = round(averageFitness / len(population), 2)
-    print("Average fitness: {}".format(averageFitness))
+    print("Average fitness: {}".format(averageFitness), end=" ")
+    print("Best phrase: {}{}".format(bestGenes.genes, round(bestGenes.fitness, 2)))
+
+    if bestGenes.genes == target:
+        isFinished = True
 
     # matingPool
     matingPool = list()
@@ -88,21 +99,11 @@ print("Target: {}".format(target))
 
 setup()
 
-counter = 1
 while(not isFinished):
-    print(counter, end=". ")
+    print(totalGeneration, end=". ")
     draw()
-
-    for i in population:
-        if i.genes == target:
-            isFinished = True
-            print("Best phrase: {}".format(i.genes))
-            break
-    else:
-        totalGeneration += 1
+    totalGeneration += 1
     
-    counter += 1
-
-print("Total generation: {}".format(totalGeneration))
+print("Total generation: {}".format(totalGeneration-1))
 print("Total population: {}".format(totalPopulation))
 print("Mutation rate: {}%".format(int(mutationRate * 100)))
