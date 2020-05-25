@@ -6,7 +6,7 @@ totalPopulation = 150
 mutationRate = 0.01
 
 # target = sorted(range(10))
-target = 'Milad Sadeghi DM'
+target = 'CallMeELNS'
 population = list()
 
 finished = False
@@ -29,7 +29,7 @@ def draw():
     
     averageFitness = round(averageFitness / len(population), 2)
     print("{}. Average fitness: {}".format(totalGeneration, averageFitness), end=" ")
-    print("Best phrase: {} {:.2f}".format(best.genes, best.fitness))
+    print("Best phrase: {} {:.2f}".format(best.genes, best.fitness)) #TODO: fix best.getPhrase
 
     finished = True if best.fitness == 1 else False
 

@@ -10,7 +10,6 @@ def newChar():
     # octdigits = '01234567'
 
     c = list(string.ascii_letters)
-    c.append(" ")
     # c = list(range(10))
     return random.choice(c)
 
