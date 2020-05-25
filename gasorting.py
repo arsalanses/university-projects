@@ -47,14 +47,20 @@ def draw():
         child.mutate(mutationRate)
         population[i] = child
 
-print("Target: {}".format(target))
+def main():
+    global totalGeneration
+    
+    print("Target: {}".format(target))
 
-setup()
+    setup()
 
-while(not finished):
-    draw()
-    totalGeneration += 1
+    while(not finished):
+        draw()
+        totalGeneration += 1
 
-print("Total generations: {}".format(totalGeneration))
-print("Total population: {}".format(totalPopulation))
-print("Mutation rate: {}%".format(math.floor(mutationRate * 100)))
+    print("Total generations: {}".format(totalGeneration))
+    print("Total population: {}".format(totalPopulation))
+    print("Mutation rate: {}%".format(math.floor(mutationRate * 100)))
+
+if __name__ == '__main__':
+    main()
