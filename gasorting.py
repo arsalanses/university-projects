@@ -13,7 +13,6 @@ finished = False
 totalGeneration = 0
 
 def setup():
-    global population
     for i in range(totalPopulation):
         population.append(DNA(len(target)))
 
