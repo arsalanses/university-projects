@@ -1,40 +1,35 @@
-mov al, 5
-mov bl, 0ah
-dec bl
-add al, bl         
+MOV al, 5   ; al = 5
+MOV bl, 0Ah ; bl = A
+DEC bl      ; bl - 1
+ADD al, bl  ; al + bl
      
-mov cx, 8
-mov bl, al
+MOV cx, 8   ; Loop 8 times
+MOV bl, al  ; Take copy of al in bl
      
-loop:
+Loop:
+MOV dl, bl
+SHL bl, 1
+AND dl, 10000000b   ; AND value of register dl with 10H
+CMP dl, 10000000b   ; Compare value of register dl with 10H
+JE PrintOne         ; If dl equal to 10H program will jump to PrintOne section otherwise PrintZero section
 
-mov dl, bl
+; PrintZero:
+MOV ah, 2
+MOV dl, '0'
+INT 21H
 
-shl bl, 1
+DEC cx
+JCXZ EndLoop    ; Check if 8 times passed or not
+JMP Loop        ; Go back to begging of loop 
 
-and dl, 10000000b
-cmp dl, 10000000b
-je one
+PrintOne:
+MOV ah, 2
+MOV dl, '1'
+INT 21H
 
-zero:
-mov ah, 2
-mov dl, '0'
-int 21h
+DEC cx
+JCXZ EndLoop    ; Check if 8 times passed or not
+JMP Loop        ; Go back to begging of loop
 
-dec cx
-jcxz end
-
-jmp    loop
-
-one:
-mov ah, 2
-mov dl, '1'
-int 21h
-
-dec cx
-jcxz end
-
-jmp    loop                       
-
-end:
-hlt
+EndLoop:
+HLT
