@@ -1,21 +1,19 @@
 mov al, 5
 mov bl, 0ah
-dec bl ; sub bl, 1
+dec bl
 add al, bl         
      
-mov cx, 9     
+mov cx, 8
+mov bl, al
+     
 loop:
 
-mov bl, al
+mov dl, bl
 
-shr al, 1
+shl bl, 1
 
-and bl, 00000001b
-cmp bl, 1
-
-dec cx
-jcxz end
-
+and dl, 10000000b
+cmp dl, 10000000b
 je one
 
 zero:
@@ -23,12 +21,18 @@ mov ah, 2
 mov dl, '0'
 int 21h
 
+dec cx
+jcxz end
+
 jmp    loop
 
 one:
 mov ah, 2
 mov dl, '1'
 int 21h
+
+dec cx
+jcxz end
 
 jmp    loop                       
 
