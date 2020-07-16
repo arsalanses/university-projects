@@ -17,7 +17,7 @@ MOV dl, bl
 SHL bl, 1
 AND dl, 10000000b   ; AND value of register dl with 80H
 CMP dl, 10000000b   ; Compare value of register dl with 80H
-JE PrintOne         ; If dl equal to 10H program will jump to PrintOne section otherwise PrintZero section
+JE PrintOne         ; If dl equal to 80H program will jump to PrintOne section otherwise PrintZero section
 
 ; PrintZero:
 ;PRINT '0'
