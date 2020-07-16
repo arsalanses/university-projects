@@ -1,3 +1,4 @@
+name "Display register in binary"
 include 'emu8086.inc'
 ORG 100h
 
