@@ -27,10 +27,29 @@ EndBinary:
 
 GOTOXY 0, 1
 
-MOV ah, 2
-MOV dl, '1'
-INT 21H
+MOV al, 41   ; al = 41
+MOV bl, 12 ; bl = 12
+ADD al, bl  ; al + bl = 53
+mov cx, 0
 
-;HLT
-RET
-END
+Decimal:
+push ax
+mov ah, 0
+cmp ax, 0
+je done
+mov dl, 10
+div dl
+inc cx
+jmp Decimal
+
+done:
+pop ax
+mov al, ah
+add al, 30h
+mov ah, 0eh
+int 10h
+loop done
+
+HLT
+;RET
+;END
